@@ -6,3 +6,4 @@
 void initLog();
 void addLog(int level, char* msg);
 void printLog(FILE* log, char* level, struct tm* date, char* msg);
+void closeLog();

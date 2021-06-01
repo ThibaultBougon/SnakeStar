@@ -42,7 +42,7 @@ void initSnake(Snake* snake) {
 int removeSnake(Snake *snake) {
 	if (!snake->body)
 		return 0;
-	while (snake->body->next)
+	while (snake->body)
 	{
 		SnakesBody *del = snake->body;
 		snake->body = snake->body->next;
@@ -52,7 +52,7 @@ int removeSnake(Snake *snake) {
 	return 0;
 }
 
-void move(Snake snake, int x, int y) {
+/*void move(Snake snake, int x, int y) {
 	int actualX = 0;
 	int actualY = 0;
 	int buffX = snake.body->pos.x;
@@ -70,7 +70,7 @@ void move(Snake snake, int x, int y) {
 		buffX = actualX;
 		buffY = actualY;
 	}
-}
+}*/
 
 int snakeLenght(Snake snake) {//don t use atm
 	int a = 0;
@@ -81,7 +81,7 @@ int snakeLenght(Snake snake) {//don t use atm
 	return a;
 }
 
-int moveNorth(Snake *snake) {
+/*int moveNorth(Snake *snake) {
 	if (snake->dir == south)
 		return 0;
 	move(*snake, 0, -1);
@@ -111,7 +111,7 @@ int moveEast(Snake*snake) {
 	move(*snake, 1, 0);
 	snake->dir = east;
 	return 1;
-}
+}*/
 
 void add(Snake* snake) {
 	Coordinates pos = lfpos(snake);
@@ -132,4 +132,44 @@ Coordinates lfpos(Snake* snake) {
 	pos.x = previous->pos.x - actual->pos.x;
 	pos.y = previous->pos.y - actual->pos.y;
 	return pos;
+}
+
+/*int moveNorth(SnakesBody body) {
+	move(&body, 0, -1);
+	return 1;
+}
+
+int moveWest(SnakesBody body) {
+	move(&body, -1, 0);
+	return 1;
+}
+
+int moveSouth(SnakesBody body) {
+	move(body, 0, 1);
+	return 1;
+}*/
+
+int moveEast(SnakesBody* body) {
+	move(body, 1, 0);
+	return 1;
+}
+
+void move(SnakesBody* body, int x, int y) {
+	int actualX = 0;
+	int actualY = 0;
+	int buffX = body->pos.x;
+	int buffY = body->pos.y;
+
+	body->pos.x += x;
+	body->pos.y += y;
+	body = body->next;
+	while (body->next) {
+		actualX = body->pos.x;
+		actualY = body->pos.y;
+		body->pos.x = buffX;
+		body->pos.y = buffY;
+		body = body->next;
+		buffX = actualX;
+		buffY = actualY;
+	}
 }
