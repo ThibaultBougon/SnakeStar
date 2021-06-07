@@ -24,7 +24,7 @@ void game() {
 	initMap(game.window);
 	setFood(&game.food);
 	
-	//initAstar(game);
+	initAstar(game);
 	/*KeyCodeMap* moveMap = NULL;
 	moveMap = mapSet(moveMap, sfKeyZ, &moveNorth);
 	moveMap = mapSet(moveMap, sfKeyQ, &moveWest);
@@ -46,7 +46,7 @@ void dispFood(Food food, sfRenderWindow* window) {
 	sfRectangleShape_destroy(rect);
 }
 
-void gameLoop(Game game, KeyCodeMap *moveMap) {
+/*void gameLoop(Game game, KeyCodeMap *moveMap) {
 
 	float totaleTime = 0;
 	float previousTimeElapsed = 0;
@@ -71,7 +71,7 @@ void gameLoop(Game game, KeyCodeMap *moveMap) {
 		if (totaleTimeSinceMove >= VELOCITY) {
 			totaleTimeSinceMove = 0;
 			sfRenderWindow_pollEvent(game.window, &event);
-			controller(moveMap, event, &game);
+			//controller(moveMap, event, &game);
 			if ((game.food.pos.x == game.snake.body->pos.x) && (game.food.pos.y == game.snake.body->pos.y)) {
 				add(&game.snake);
 				setFood(&game.food);
@@ -81,12 +81,12 @@ void gameLoop(Game game, KeyCodeMap *moveMap) {
 				return;
 		}
 	}
-}
+}*/
 
-int collideWithBody(Snake snake) {
-	SnakesBody *buff = snake.body->next;
+int collideWithBody(SnakesBody body) {
+	SnakesBody *buff = body.next;
 	while (buff->next) {
-		if (snake.body->pos.x == buff->pos.x && snake.body->pos.y == buff->pos.y) return 0;
+		if (body.pos.x == buff->pos.x && body.pos.y == buff->pos.y) return 0;
 		buff = buff->next;
 	}
 	return 1;
@@ -138,7 +138,7 @@ void clear(sfRenderWindow* window, Snake snake) {
 	sfWindow_destroy(window);
 }
 
-void controller(KeyCodeMap *map, sfEvent eventKey, Game* game) {
+/*void controller(KeyCodeMap *map, sfEvent eventKey, Game* game) {
 	if (eventKey.type == sfEvtClosed) {
 		sfRenderWindow_close(game->window);
 		return;
@@ -167,7 +167,7 @@ void controller(KeyCodeMap *map, sfEvent eventKey, Game* game) {
 		default:
 			break;
 	}
-}
+}*/
 
 void printGame(Game *game) {
 	sfRenderWindow_clear(game->window, sfBlack);

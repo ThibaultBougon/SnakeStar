@@ -6,7 +6,7 @@ FILE* log;
 
 void initLog() {
     if (!(log = fopen("log.txt", "a+"))) {
-        perror("fail open file log");
+        perror("fail open log file");
     }
 }
 
@@ -33,4 +33,10 @@ void addLog(int level, char* msg) {
 
 void printLog(FILE* log,char* level, struct tm* date, char *msg) {
     int a = fprintf(log, "%d:%d:%d : %d:%d:%d  |  %s : %s\n", date->tm_mday, date->tm_mon, date->tm_year + 1900, date->tm_hour, date->tm_min, date->tm_sec, level, msg);
+}
+
+void closeLog() {
+  if (!fclose(log)){
+    perror("fail close log file");
+  }
 }

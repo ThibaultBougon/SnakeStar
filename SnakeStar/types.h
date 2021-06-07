@@ -43,10 +43,10 @@ typedef struct {
 	Food food;
 }Game;
 
-static inline int isAllowToGo(Snake snake) {
-	if (snake.body->pos.x == 0 || snake.body->pos.y == 0 ||
-		snake.body->pos.x == MAPSIZE - 1 || snake.body->pos.y == MAPSIZE - 1)
+static inline int isAllowToGo(SnakesBody body) {
+	if (body.pos.x == 0 || body.pos.y == 0 ||
+		body.pos.x == MAPSIZE - 1 || body.pos.y == MAPSIZE - 1)
 		return 0;
-	return collideWithBody(snake);
+	return collideWithBody(body);
 }
-int collideWithBody(Snake snake);
+int collideWithBody(SnakesBody body);

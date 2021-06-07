@@ -9,5 +9,6 @@ int main()
 {
 	initLog();
 	game();
+	closeLog();
 	return 0;
 }
