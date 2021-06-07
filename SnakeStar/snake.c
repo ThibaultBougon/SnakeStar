@@ -47,8 +47,10 @@ int removeSnake(Snake *snake) {
 		SnakesBody *del = snake->body;
 		snake->body = snake->body->next;
 		free(del);
+		del = NULL;
 	}
 	free(snake->body);
+	snake->body = NULL;
 	return 0;
 }
 

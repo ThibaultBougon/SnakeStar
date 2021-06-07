@@ -15,9 +15,9 @@ void initAstar(Game game) {
 
 
 	for (int i = 0; i <4; ++i) {
-	//for (int i = 3; i >=0; --i) {
 		freeArray(nodeArray[i]);
-		free(nodeArray[i]);
+		//free(nodeArray[i]);
+		nodeArray[i] = NULL;
 	}
 }
 
@@ -25,14 +25,16 @@ void freeArray(Node* node) {
 	if (!node)
 		return;
 	while (node) {
-		Node* del = node;
+		Node *del = node;
 		node = node->next;
 		free(del);
+		del = NULL;
 	}
+	return 0;
 }
 
 Node* firstNode(Game game) {
-	Node* newNode = malloc(sizeof(Node*));
+	Node* newNode = (Node*)malloc(sizeof(Node));
 	newNode->gCost = 0;
 	newNode->hCost = calculateHCost(game.food, game.snake.body->pos);
 	newNode->fCost = newNode->gCost + newNode->hCost;
@@ -70,7 +72,7 @@ void findNeighbor(Node** nodeArray, Game game) {
 }
 
 Node** createNode(Game game, SnakesBody body, Node** nodeArray, Direction dir) {
-	Node* newNode = malloc(sizeof(Node*));
+	Node* newNode = (Node*)malloc(sizeof(Node));
 	newNode->hCost = calculateHCost(game.food, body.pos);
 	newNode->gCost = calculateGCost(game.snake, body.pos);
 	newNode->fCost = (newNode->gCost + newNode->hCost);
